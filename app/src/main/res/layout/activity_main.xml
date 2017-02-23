@@ -10,9 +10,20 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.patchouligo.dtrcbapn.MainActivity">
 
-    <TextView
-        android:id="@+id/tv"
+    <Button
+        android:id="@+id/start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:text="显示"/>
+    <Button
+        android:id="@+id/end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="隐藏"
+        android:layout_below="@id/start"/>
+    <TextView
+        android:id="@+id/netstate"
+        android:layout_below="@+id/end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </RelativeLayout>
