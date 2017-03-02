@@ -10,12 +10,11 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.patchouligo.dtrcbapn.FloatActivity">
 
-    <TextView
+    <ImageView
         android:id="@+id/net_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="内网"
-        android:textSize="28dp"
-        android:textColor="?android:attr/textColorTertiary" />
+        android:maxHeight="30dp"
+        android:maxWidth="30dp"/>
 
 </RelativeLayout>

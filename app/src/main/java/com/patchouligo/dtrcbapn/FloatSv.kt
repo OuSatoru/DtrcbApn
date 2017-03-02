@@ -14,6 +14,7 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
+import android.widget.ImageView
 import android.widget.TextView
 import java.util.*
 import kotlin.concurrent.timer
@@ -28,7 +29,7 @@ class FloatSv : Service() {
     private var endTouchX = 0f
     private var endTouchY = 0f
 
-    var flBtn: TextView? = null
+    var flBtn: ImageView? = null
     val check = CheckNet()
 
 
@@ -62,17 +63,17 @@ class FloatSv : Service() {
 
         wm!!.addView(view, wmParams)
 
-        flBtn = view!!.findViewById(R.id.net_label) as TextView
+        flBtn = view!!.findViewById(R.id.net_label) as ImageView
 
         val handler = object : Handler() {
             override fun handleMessage(msg: Message) {
                 super.handleMessage(msg)
                 when (msg.what) {
-                    100 -> flBtn?.text = "外网"
-                    200 -> flBtn?.text = "东台内网"
-                    300 -> flBtn?.text = "无网络"
-                    400 -> flBtn?.text = "WIFI"
-                    500 -> flBtn?.text = "江苏农信"
+                    100 -> flBtn?.setImageResource(R.drawable.out)
+                    200 -> flBtn?.setImageResource(R.drawable.east)
+                    300 -> flBtn?.setImageResource(R.drawable.none)
+                    400 -> flBtn?.setImageResource(R.drawable.wifi)
+                    500 -> flBtn?.setImageResource(R.drawable.prov)
                 }
             }
         }
@@ -89,7 +90,7 @@ class FloatSv : Service() {
                     info.extraInfo == "jsnx.js" -> handler.sendEmptyMessage(500)
                 }
             }
-        }, 0, 3000)
+        }, 0, 2000)
 
         view!!.setOnTouchListener { v, event ->
             endTouchX = event.rawX
@@ -132,8 +133,14 @@ class FloatSv : Service() {
         }
 
         flBtn?.setOnTouchListener { v, event ->
+            val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
+            var barHeight = 45
+            if (resourceId > 0) {
+                barHeight = resources.getDimensionPixelSize(resourceId)
+            }
+            Log.i("==barhight==", barHeight.toString())
             endTouchX = event.rawX
-            endTouchY = event.rawY - 45
+            endTouchY = event.rawY - barHeight
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     startTouchViewX = event.x
